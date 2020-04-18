@@ -1,0 +1,19 @@
+{
+  "name": "Bracket",
+  "version": "0.0.1",
+  "description": "JavaScript Template Engine",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/typable/Bracket.git"
+  },
+  "keywords": [],
+  "author": "typable",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/typable/Bracket/issues"
+  },
+  "homepage": "https://github.com/typable/Bracket#readme"
+}

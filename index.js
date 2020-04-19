@@ -23,7 +23,16 @@ module.exports = {
 				.replace(/'/g, "&#039;");
 		});
 		this.define('include', (string, values) => {
-			return this.render(string, values);
+			let path = string;
+			if(string.match(/^\([^)]*\)$/g)) {
+				path = this.action.default(string, values);
+			}
+			try {
+				return this.render(path, values);
+			}
+			catch(error) {
+				console.error(error);
+			}
 		});
 		this.define('for', (string, values, content) => {
 			let result = '';

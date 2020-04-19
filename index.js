@@ -6,7 +6,12 @@ module.exports = {
 	init: function(args) {
 		this.path = args.path || __dirname;
 		this.define('default', function(string, values) {
-			return new Function(Object.keys(values), `return ${string}`)(...Object.values(values));
+			try {
+				return new Function(Object.keys(values), `return ${string}`)(...Object.values(values));
+			}
+			catch(error) {
+				console.log(error);
+			}
 		});
 		this.define('escape', (string, values) => {
 			return this.action
@@ -39,6 +44,16 @@ module.exports = {
 			let result = '';
 			if(string && content) {
 				let is = this.action.default(string, values);
+				if(is && is === true) {
+					result = content;
+				}
+			}
+			return result;
+		});
+		this.define('def', (string, values, content) => {
+			let result = '';
+			if(string && content) {
+				let is = this.action.default(`typeof ${string} !== 'undefined'`, values);
 				if(is && is === true) {
 					result = content;
 				}
@@ -84,19 +99,14 @@ module.exports = {
 						content = content.replace(/^\{\{[^}]*\}\}/g, '');
 						content = content.replace(/\{\{[^}]*\}\}$/g, '');
 					}
-					try {
-						if(this.action[action]) {
-							result = this.action[action](value, values, content);
-						}
-						else {
-							result = this.action.default(value, values, content);
-						}
-						if(result !== undefined) {
-							string = string.replace(new RegExp(this.quote(context || match[0]), 'g'), result);
-						}
+					if(this.action[action]) {
+						result = this.action[action](value, values, content);
 					}
-					catch(error) {
-						console.error(error);
+					else {
+						result = this.action.default(value, values, content);
+					}
+					if(result !== undefined) {
+						string = string.replace(new RegExp(this.quote(context || match[0]), 'g'), result);
 					}
 				}
 			}

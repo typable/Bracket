@@ -55,3 +55,4 @@ These are the pre-implemented actions:
 |`include`|Loads content of defined file.|`{{include:tag/header}}`|
 |`for`|Loops over the define block.|`{{for:data.list->item}} ... {{for:}}`|
 |`if`|Renders content only if statement is true.|`{{if:data.visible}} ... {{if:}}`|
+|`def`|Checks if the given variable is defined.|`{{def:data.content}} ... {{def:}}`|

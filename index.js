@@ -22,19 +22,19 @@ module.exports = {
 				.replace(/"/g, "&quot;")
 				.replace(/'/g, "&#039;");
 		});
-		this.define('include', (string, values) => {
+		this.define('include', async (string, values) => {
 			let path = string;
 			if(string.match(/^\([^)]*\)$/g)) {
 				path = this.action.default(string, values);
 			}
 			try {
-				return this.render(path, values);
+				return await this.render(path, values);
 			}
 			catch(error) {
 				console.error(error);
 			}
 		});
-		this.define('for', (string, values, content) => {
+		this.define('for', async (string, values, content) => {
 			let result = '';
 			if(string && content) {
 				let [ key, name ] = string.split('->');
@@ -43,7 +43,7 @@ module.exports = {
 					for(let item of array) {
 						let scope = Object.assign({}, values);
 						scope[name] = item;
-						result += this.compile(content, scope);
+						result += await this.compile(content, scope);
 					}
 				}
 			}
@@ -73,11 +73,11 @@ module.exports = {
 	define: function(action, callback) {
 		this.action[action] = callback;
 	},
-	render: function(file, values) {
-		let string = fs.readFileSync(`${this.path}/${file}.html`, 'utf8');
-		return this.compile(string, values);
+	render: async function(file, values) {
+		let string = fs.readFileSync(`${this.path}/views/${file}.html`, 'utf8');
+		return await this.compile(string, values);
 	},
-	compile: function(string, values) {
+	compile: async function(string, values) {
 		let exp = new RegExp(`\{\{([^}]*)\}\}`, 'g');
 		if(string) {
 			let match = null;
@@ -109,7 +109,7 @@ module.exports = {
 						content = content.replace(/\{\{[^}]*\}\}$/g, '');
 					}
 					if(this.action[action]) {
-						result = this.action[action](value, values, content);
+						result = await this.action[action](value, values, content);
 					}
 					else {
 						result = this.action.default(value, values, content);

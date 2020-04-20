@@ -25,7 +25,7 @@ This is a simple example how the Bracket syntax works:
 ```
 
 ```javascript
-bracket.render('index', {
+await bracket.render('index', {
 	linkList: [
 		{ path: '/', text: 'Home' },
 		{ path: '/about', text: 'About' }

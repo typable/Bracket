@@ -16,31 +16,31 @@ This is a simple example how the Bracket syntax works:
 
 ```html
 <ul class="link-list">
-	{{for:linkList->item}}
-		<li class="link">
-			<a href="{{item.path}}" title="{{item.text}}">{{item.text}}</a>
-		</li>
-	{{for:}}
+   {{for:linkList->item}}
+      <li class="link">
+         <a href="{{item.path}}" title="{{item.text}}">{{item.text}}</a>
+      </li>
+   {{for:}}
 </ul>
 ```
 
 ```javascript
 await bracket.render('index', {
-	linkList: [
-		{ path: '/', text: 'Home' },
-		{ path: '/about', text: 'About' }
-	]
+   linkList: [
+      { path: '/', text: 'Home' },
+      { path: '/about', text: 'About' }
+   ]
 });
 ```
 
 ```html
 <ul class="link-list">
-	<li class="link">
-		<a href="/" title="Home">Home</a>
-	</li>
-	<li class="link">
-		<a href="/about" title="About">About</a>
-	</li>
+   <li class="link">
+      <a href="/" title="Home">Home</a>
+   </li>
+   <li class="link">
+      <a href="/about" title="About">About</a>
+   </li>
 </ul>
 ```
 <br>

@@ -10,12 +10,11 @@ module.exports = {
 				return new Function(Object.keys(values), `return ${string}`)(...Object.values(values));
 			}
 			catch(error) {
-				console.log(error);
+				console.warn(`WARN: The variable '${string}' is undefined!`);
 			}
 		});
 		this.define('escape', (string, values) => {
-			return this.action
-				.default(string, values)
+			return this.action.default(string, values)
 				.replace(/&/g, "&amp;")
 				.replace(/</g, "&lt;")
 				.replace(/>/g, "&gt;")
@@ -31,7 +30,7 @@ module.exports = {
 				return await this.render(path, values);
 			}
 			catch(error) {
-				console.error(error);
+				console.error(`ERROR: Failed to include '${path}'!`);
 			}
 		});
 		this.define('for', async (string, values, content) => {

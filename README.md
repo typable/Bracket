@@ -14,6 +14,7 @@ bracket.init({ path: __dirname + '/views' });
 
 This is a simple example how the Bracket syntax works:
 
+Template:
 ```html
 <ul class="link-list">
    {{for:linkList->item}}
@@ -25,14 +26,15 @@ This is a simple example how the Bracket syntax works:
 ```
 
 ```javascript
-await bracket.render('index', {
+bracket.render('index', {
    linkList: [
       { path: '/', text: 'Home' },
       { path: '/about', text: 'About' }
    ]
-});
+}).catch(console.error);
 ```
 
+Result:
 ```html
 <ul class="link-list">
    <li class="link">
@@ -62,3 +64,19 @@ These are the pre-implemented actions:
 **Dynamic Includes**
 
 `{{include:(data.site)}}`
+
+<br>
+
+### Define Custom Actions
+
+Definition:
+```javascript
+bracket.define('uppercase', async function(string, values) {
+   return string.toUpperCase();
+});
+```
+
+Result:
+```
+{{uppercase:'Hello World!'}}
+```

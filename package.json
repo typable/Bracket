@@ -1,5 +1,5 @@
 {
-  "name": "Bracket",
+  "name": "@typable/bracket",
   "version": "0.0.1",
   "description": "JavaScript Template Engine",
   "main": "index.js",
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/typable/Bracket.git"
+    "url": "git+https://github.com/typable/bracket.git"
   },
   "keywords": [],
   "author": "typable",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/typable/Bracket/issues"
   },
-  "homepage": "https://github.com/typable/Bracket#readme"
+  "homepage": "https://github.com/typable/Bracket#readme",
+  "publishConfig": {
+	  "registry": "https://npm.pkg.github.com/"
+  }
 }
